@@ -1,0 +1,27 @@
+<div class="filters">
+  <h2 style="margin-bottom: 35px;">Filters</h2>
+
+  <!-- Domain Filter -->
+  <select [(ngModel)]="selectedDomain" (change)="applyFilters()" style="margin-bottom: 10px;">
+    <option value="" style="font-size: 16px;">All Domains</option>
+    <option *ngFor="let domain of uniqueDomains" [value]="domain" style="font-size: 16px;">{{ domain }}</option>
+  </select>
+
+  <!-- Gender Filter -->
+  <select [(ngModel)]="selectedGender" (change)="applyFilters()" style="margin-bottom: 10px;">
+    <option value="" style="font-size: 16px;">All Genders</option>
+    <option value="Male" style="font-size: 16px;">Male</option>
+    <option value="Female" style="font-size: 16px;">Female</option>
+    <option value="Agender" style="font-size: 16px;">Agender</option>
+  </select>
+
+  <!-- Availability Filter -->
+  <select [(ngModel)]="selectedAvailability" (change)="applyFilters()" style="margin-bottom: 10px;">
+    <option value="" style="font-size: 16px;">All Availability</option>
+    <option value="true" style="font-size: 16px;">Available</option>
+    <option value="false" style="font-size: 16px;">Not Available</option>
+  </select>
+
+  <!-- Apply Filters Button -->
+  <button (click)="applyAllFilters()" style="margin-bottom: 10px; font-size: 16px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Apply Filters</button>
+</div>

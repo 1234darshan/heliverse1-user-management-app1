@@ -1,0 +1,62 @@
+<div class="search-container">
+    <input type="text" [(ngModel)]="searchText" (input)="onSearch(searchText)" placeholder="Search by name" class="search-input">
+    <button (click)="onSearch(searchText)" class="search-button">Search</button>
+  </div>
+  
+  <div class="user-cards">
+    <div class="user-card" *ngFor="let user of paginatedUsers">
+      <div class="user-info">
+        <label class="checkbox-container">
+          <input type="checkbox" [checked]="selectedUsers.includes(user)" (change)="toggleSelection(user)" [disabled]="!isSelectable(user)">
+          <span class="checkmark"></span>
+        </label>
+        <img [src]="user.avatar" alt="User Avatar">
+        <div class="user-details">
+          <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+          <p>{{ user.email }}</p>
+          <p>{{ user.gender }}</p>
+          <p>{{ user.domain }}</p>
+          <p>Available: {{ user.available ? 'Yes' : 'No' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div style="position: relative;">
+    <button style="position: absolute;left: 2%;" (click)="createTeam()" [disabled]="selectedUsers.length === 0" class="create-team-btn">Create Team</button>
+  </div>
+  
+  <div class="pagination">
+    <button [disabled]="currentPage === 1" (click)="currentPage = currentPage - 1">Previous</button>
+    <span>Page {{ currentPage }}</span>
+    <button [disabled]="currentPage * usersPerPage >= filteredUsers.length" (click)="currentPage = currentPage + 1">Next</button>
+  </div>
+  
+  <div *ngIf="createdTeam">
+    <h2>Team Details</h2>
+    <table class="team-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Gender</th>
+          <th>Domain</th>
+          <th>Available</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let member of createdTeam.members">
+          <td>{{ member.first_name }} {{ member.last_name }}</td>
+          <td>{{ member.email }}</td>
+          <td>{{ member.gender }}</td>
+          <td>{{ member.domain }}</td>
+          <td>{{ member.available ? 'Yes' : 'No' }}</td>
+          <td>
+            <button (click)="removeMember(member)" class="remove-button">Remove</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

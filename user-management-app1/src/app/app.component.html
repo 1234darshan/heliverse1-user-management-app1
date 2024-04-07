@@ -1,0 +1,18 @@
+<div class="container">
+  <h1>User List</h1>
+  <!-- Your content goes here -->
+</div>
+
+<!-- Menu Bar -->
+<div class="menu-bar">
+  <!-- Add your menu items here -->
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</div>
+
+<app-user-filters (filtersApplied)="applyFilters($event)"></app-user-filters>
+<app-user-card [filters]="filters"></app-user-card>
+<!-- <router-outlet></router-outlet> -->
